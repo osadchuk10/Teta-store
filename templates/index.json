@@ -87,28 +87,21 @@
             "collection": "best-sellers"
           }
         },
-        "collection_thLwNE": {
-          "type": "Collection",
-          "settings": {
-            "collection": "my-collection-2"
-          }
-        },
         "collection_H6hFhx": {
           "type": "Collection",
           "settings": {
-            "collection": ""
+            "collection": "hydrogen"
           }
         },
         "collection_HfNwWk": {
           "type": "Collection",
           "settings": {
-            "collection": ""
+            "collection": "my-collection-2"
           }
         }
       },
       "block_order": [
         "collection_nLYEdi",
-        "collection_thLwNE",
         "collection_H6hFhx",
         "collection_HfNwWk"
       ],
