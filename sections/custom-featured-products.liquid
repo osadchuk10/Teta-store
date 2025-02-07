@@ -1,0 +1,466 @@
+<style>
+  .custom-featured__products {
+    display: flex;
+  }
+  .custom-featured__image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+  .custom-featured__success-message {
+    display: none;
+  }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<div
+  class="custom-featured custom-featured__swiper-section section-custom-featured-product-items page-width"
+  id="custom-featured-section-id-{{ section.id }}"
+  data-time-rotate="{{ section.settings.time_rotate }}"
+  data-autorotate="{{ section.settings.auto_rotate }}"
+  data-desktop-items="{{ section.settings.desktop_quantity }}"
+  data-tablet-items="{{ section.settings.tablet_quantity }}"
+  data-mobile-items="{{ section.settings.mobile_quantity }}"
+>
+  <div class="custom-featured__heading">
+    <h2 class="h2">{{ section.settings.heading }}</h2>
+  </div>
+  <div class="custom-featured__collection-list">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'Collection' %}
+          <div
+            class="custom-featured__collection {% if forloop.first %}active{% endif %}"
+            data-collection-id="{{ block.settings.collection.id }}"
+          >
+            {% if block.settings.collection != blank %}
+              {{ block.settings.collection.title }}
+            {% else %}
+              Collection-{{ forloop.index }}
+            {% endif %}
+          </div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+  <div class="custom-featured__product-list">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'Collection' %}
+          {% if block.settings.collection %}
+            <div
+              class="custom-featured__products"
+              data-collection-id="{{ block.settings.collection.id }}"
+              {% if forloop.first %}
+                style="display: flex;"
+              {% else %}
+                style="display: none;"
+              {% endif %}
+            >
+              {% if block.settings.collection != blank %}
+                <div class="swiper" data-index="{{ forloop.index }}">
+                  <div class="swiper-wrapper">
+                    {% for product in block.settings.collection.products %}
+                      <div class="custom-featured__product swiper-slide" data-product-id="{{ product.id }}">
+                        <div class="custom-featured__image">
+                          {%- capture srcset -%}
+                          {{ product.featured_image | image_url: width: 165 }} 165w,
+                          {{ product.featured_image | image_url: width: 360 }} 360w,
+                          {{ product.featured_image | image_url: width: 533 }} 533w,
+                          {{ product.featured_image | image_url: width: 720 }} 720w,
+                          {{ product.featured_image | image_url: width: 940 }} 940w,
+                          {{ product.featured_image | image_url: width: 1066 }} 1066w,
+                          {{ product.featured_image | image_url: width: 1600 }} 1600w
+                          {%- endcapture -%}
+                          <a href="{{ product.url | url_escape}}">
+                            {{
+                              product.featured_image
+                              | image_url: width: 400
+                              | image_tag:
+                                srcset: srcset,
+                                sizes: '(min-width: 1200px) 400px, (min-width: 750px) 50vw, 100vw',
+                                alt: product.title,
+                                loading: 'lazy'
+                            }}
+                          </a>
+                        </div>
+                        <a href="{{ product.url | url_escape}}">
+                          <div class="custom-featured__title">{{ product.title }}</div>
+                        </a>
+                        <div class="custom-featured__description">{{ product.description | truncate: 100 }}</div>
+                        <div class="custom-featured__info">
+                          <div class="custom-featured__price" id="product-price-{{ product.id }}">
+                            {{ product.price | money_without_trailing_zeros }}
+                          </div>
+
+                          {% if product.variants.size > 1 %}
+                            <select class="custom-featured__options" data-product-id="{{ product.id }}">
+                              {% for variant in product.variants %}
+                                <option
+                                  value="{{ variant.id }}"
+                                  data-price="{{ variant.price }}"
+                                  data-available="{{ variant.available }}"
+                                  data-image="{{ variant.image.src | img_url: '600x' }}"
+                                  data-currency="{{ localization.country.currency.symbol }}"
+                                >
+                                  {{ variant.title }}
+                                </option>
+                              {% endfor %}
+                            </select>
+                          {% endif %}
+                        </div>
+                        <div class="custom-featured__add-to-cart">
+                          <button
+                            class="{% if product.available %} custom-featured__add-to-cart--click {% else %} custom-featured__add-to-cart--disabled {% endif %}"
+                            data-product-id="{{ product.id }}"
+                            data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                          >
+                            <span> {% render 'custom-cart-icon' %} </span
+                            ><span>
+                              {%- if product.available %}
+                                Add to cart
+                              {% else %}
+                                Sold Out
+                              {% endif -%}
+                            </span>
+                          </button>
+                        </div>
+                        <div class="custom-featured__success-message">Added to the cart</div>
+                      </div>
+                    {% endfor %}
+                  </div>
+
+                  <div class="swiper-button-prev" data-index="{{ forloop.index }}"><span></span></div>
+                  <div class="swiper-button-next" data-index="{{ forloop.index }}"><span></span></div>
+                </div>
+              {% else %}
+                <div class="custom-featured__product-placeholder">
+                  <div class="swiper">
+                    <div class="swiper-wrapper">
+                      {% for i in (1..section.settings.desktop_quantity) %}
+                        {% assign placeholder_image = 'product-' | append: i %}
+                        <div class="custom-featured__product swiper-slide" data-product-id="{{ product.id }}">
+                          {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+      {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+<script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  function updateOptions(section) {
+    section.querySelectorAll('.custom-featured__options').forEach((select) => {
+      select.addEventListener('change', function (event) {
+        const selectedVariantId = event.target.value;
+        const productId = event.target.getAttribute('data-product-id');
+        const selectedOption = event.target.querySelector(`option[value="${selectedVariantId}"]`);
+        const selectedPrice = selectedOption.getAttribute('data-price');
+        const storeCurrency = selectedOption.getAttribute('data-currency');
+
+        const priceContainer = section.querySelector(`#product-price-${productId}`);
+        priceContainer.textContent = storeCurrency + selectedPrice / 100;
+
+        const button = section.querySelector(
+          `.custom-featured__product[data-product-id="${productId}"] .custom-featured__add-to-cart--click`
+        );
+
+        button.setAttribute('data-variant-id', selectedVariantId);
+      });
+    });
+  }
+
+  function setChoosenCollectionqwe(section) {
+    const collectionTitles = section.querySelectorAll('.custom-featured__collection');
+    const productLists = section.querySelectorAll('.custom-featured__products');
+
+    collectionTitles.forEach((title) => {
+      title.addEventListener('click', function () {
+        const collectionId = this.getAttribute('data-collection-id');
+
+        collectionTitles.forEach((t) => t.classList.remove('active'));
+        productLists.forEach((list) => (list.style.display = 'none'));
+
+        this.classList.add('active');
+        section.querySelector(`.custom-featured__products[data-collection-id="${collectionId}"]`).style.display =
+          'flex';
+      });
+    });
+  }
+
+  function updateSwiper(section) {
+    let timeRotate = section.getAttribute('data-time-rotate');
+    let desktopItems = Number(section.getAttribute('data-desktop-items'));
+    let tabletItems = Number(section.getAttribute('data-tablet-items'));
+    let mobileItems = Number(section.getAttribute('data-mobile-items'));
+    let auto_rotate = section.getAttribute('data-autorotate') === 'true';
+
+    const swiperContainers = section.querySelectorAll('.swiper');
+
+    if (!swiperContainers.length) return;
+
+    swiperContainers.forEach((swiperContainer) => {
+      let swiperIndex = swiperContainer.getAttribute('data-index');
+
+      let totalSlides = swiperContainer.querySelectorAll('.swiper-slide').length;
+
+      let prevEl = null;
+      let nextEl = null;
+
+      section.querySelectorAll('.swiper-button-prev').forEach((prev) => {
+        if (prev.getAttribute('data-index') === swiperIndex) {
+          prevEl = prev;
+        }
+      });
+
+      section.querySelectorAll('.swiper-button-next').forEach((next) => {
+        if (next.getAttribute('data-index') === swiperIndex) {
+          nextEl = next;
+        }
+      });
+
+      let actualDesktopItems = Math.min(desktopItems, totalSlides);
+      let actualTabletItems = Math.min(tabletItems, totalSlides);
+      let actualMobileItems = Math.min(mobileItems, totalSlides);
+
+      const swiperConfig = {
+        direction: 'horizontal',
+        slidesPerView: actualDesktopItems,
+        navigation: {
+          prevEl: prevEl,
+          nextEl: nextEl,
+        },
+        loop: totalSlides >= desktopItems * 2,
+        breakpoints: {
+          320: { slidesPerView: actualMobileItems },
+          768: { slidesPerView: actualTabletItems },
+          1024: { slidesPerView: actualDesktopItems },
+        },
+      };
+
+      if (auto_rotate) {
+        swiperConfig.autoplay = {
+          delay: Number(timeRotate) * 1000,
+          disableOnInteraction: false,
+        };
+      }
+
+      new Swiper(swiperContainer, swiperConfig);
+    });
+  }
+
+  function updateCart(section) {
+    const addToCartButtons = section.querySelectorAll('.custom-featured__add-to-cart--click');
+
+    addToCartButtons.forEach((button) => {
+      button.addEventListener('click', function () {
+        const variantId = button.getAttribute('data-variant-id');
+        const successMessage = button.closest('.custom-featured__add-to-cart').nextElementSibling;
+
+        addToCart(variantId, button, successMessage);
+      });
+    });
+
+    function addToCart(variantId, button, successMessage) {
+  let formData = {
+    items: [{ id: variantId, quantity: 1 }],
+  };
+
+  fetch(window.Shopify.routes.root + 'cart/add.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => response.json())
+    .then(() => {
+      
+      button.style.display = 'none';
+      successMessage.style.display = 'block';
+
+      setTimeout(() => {
+        successMessage.style.display = 'none';
+        button.style.display = 'inline-block';
+      }, 5000);
+
+   
+      return fetch('/cart.js');
+    })
+    .then(response => response.json())
+    .then(cart => {
+      const cartBubble = document.querySelector('#cart-icon-bubble .cart-count-bubble span');
+
+      if (cartBubble) {
+        cartBubble.textContent = cart.item_count;
+      } else if (cart.item_count > 0) {
+      
+        const cartIcon = document.querySelector('#cart-icon-bubble');
+        if (cartIcon) {
+          const bubble = document.createElement('div');
+          bubble.classList.add('cart-count-bubble');
+          bubble.innerHTML = `<span aria-hidden="true">${cart.item_count}</span><span class="visually-hidden">${cart.item_count} item</span>`;
+          cartIcon.appendChild(bubble);
+        }
+      }
+    })
+    .catch((error) => console.error('Error:', error));
+}
+
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const uniqueSection = document.querySelector('#custom-featured-section-id-{{ section.id }}');
+    updateSwiper(uniqueSection);
+    setChoosenCollectionqwe(uniqueSection);
+    updateCart(uniqueSection);
+    updateOptions(uniqueSection);
+  });
+
+  document.addEventListener('shopify:section:load', function (event) {
+    const uniqueSection = document.querySelector('#custom-featured-section-id-{{ section.id }}');
+    updateSwiper(uniqueSection);
+    setChoosenCollectionqwe(uniqueSection);
+    updateCart(uniqueSection);
+    updateOptions(uniqueSection);
+  });
+
+  document.addEventListener('shopify:section:select', function (event) {
+    const uniqueSection = document.querySelector('#custom-featured-section-id-{{ section.id }}');
+    updateSwiper(uniqueSection);
+    setChoosenCollectionqwe(uniqueSection);
+    updateCart(uniqueSection);
+    updateOptions(uniqueSection);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Custom Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Custom Featured Products"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_rotate",
+      "default": true,
+      "label": "Auto Rotate Items"
+    },
+    {
+      "type": "range",
+      "id": "time_rotate",
+      "label": "Seconds for changing slides",
+      "info": "If you don't see the changes click Save button",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "unit": "sec",
+      "default": 5
+    },
+    {
+      "type": "select",
+      "id": "desktop_quantity",
+      "label": "Items on Desktop",
+      "default": "4",
+      "info": "If you don't see the changes click Save button",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "tablet_quantity",
+      "label": "Items on Tablet",
+      "default": "2",
+      "info": "If you don't see the changes click Save button",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_quantity",
+      "label": "Items on Mobile",
+      "default": "1",
+      "info": "If you don't see the changes click Save button",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "Collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Featured Products",
+      "blocks": [
+        {
+          "type": "Collection"
+        },
+        {
+          "type": "Collection"
+        },
+        {
+          "type": "Collection"
+        },
+        {
+          "type": "Collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
