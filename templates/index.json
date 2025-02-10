@@ -47,7 +47,7 @@
         "text_color": "#37341c",
         "buttons_color": "#89960c",
         "heading": "Featured Products",
-        "auto_rotate": false,
+        "auto_rotate": true,
         "time_rotate": 5,
         "desktop_quantity": "4",
         "tablet_quantity": "2",
