@@ -1,3 +1,10 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+  rel="stylesheet"
+>
 <style>
   .custom-featured__products {
     display: flex;
@@ -10,11 +17,195 @@
   .custom-featured__success-message {
     display: none;
   }
+  .custom-featured__collection-list {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    border: 2.5px solid black;
+    border-radius: 64px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    padding: 14px 10px;
+  }
+  .custom-featured__collection {
+    margin: 0 20px;
+    padding: 24px 16px;
+    border-radius: 64px;
+  }
+  .custom-featured__heading {
+    text-align: center;
+    font-size: 48px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+  }
+  .custom-featured__collection--active {
+    background: aqua;
+  }
+  .custom-featured__swiper-pagination {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+    margin-top: 22px;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    position: static;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fcfcfc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 24px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  .swiper-button-prev::after {
+    content: '\2190';
+  }
+  .swiper-button-next::after {
+    content: '\2192';
+  }
+
+  .swiper-button-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .swiper-wrapper {
+    padding-top: 22px;
+  }
+  .custom-featured__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .custom-featured__add-to-cart {
+    width: 100%;
+  }
+  .custom-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    border: none;
+    padding: 16px 28px 16px 28px;
+  }
+  .custom-featured__product-info {
+    font-family: 'Montserrat', sans-serif;
+    margin-right: 10px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+  .custom-featured__add-to-cart--click,
+  .custom-featured__add-to-cart--disabled {
+    padding: 10px 0;
+    width: 100%;
+    margin-top: auto;
+  }
+
+  .swiper-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  .custom-featured__button-label {
+    margin-left: 10px;
+  }
+  .custom-featured__options {
+    border: none;
+    padding: 5px 10px;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 10px;
+  }
+  .custom-featured__title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    text-decoration: none;
+  }
+  .custom-featured__product-info a {
+    text-decoration: none;
+  }
+  .custom-featured__description {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .custom-button {
+    color: #fcfcfc;
+  }
+  .custom-button svg path {
+    fill: #fcfcfc;
+  }
+  .custom-featured__options{
+    background: #ECEAE0;
+  }
 </style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+{% style %}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  .custom-featured__heading,
+  .custom-featured__collection{
+    color: {{ section.settings.text_color }};
+  }
+  .custom-featured__collection-list{
+    border: 2.5px solid {{ section.settings.text_color }};
+  }
+
+  .custom-featured__collection {
+    color: {{ section.settings.text_color }};
+  }
+  .custom-featured__collection--active{
+    background: {{ section.settings.text_color }};
+    color: #E9EBCE;
+
+  }
+  .custom-featured__title, .custom-featured__description, .custom-featured__options{
+    color: {{ section.settings.text_color }};
+  }
+  .custom-button{
+    background: {{ section.settings.buttons_color }};
+  }
+  .custom-featured__price{
+    color: {{ section.settings.buttons_color }};
+  }
+  .swiper-button-next, .swiper-button-prev{
+    background: {{ section.settings.buttons_color }};
+  }
+{% endstyle %}
 
 <div
-  class="custom-featured custom-featured__swiper-section section-custom-featured-product-items page-width"
+  class="custom-featured custom-featured__swiper-section section-custom-featured-product-items page-width section-{{ section.id }}-padding"
   id="custom-featured-section-id-{{ section.id }}"
   data-time-rotate="{{ section.settings.time_rotate }}"
   data-autorotate="{{ section.settings.auto_rotate }}"
@@ -23,14 +214,14 @@
   data-mobile-items="{{ section.settings.mobile_quantity }}"
 >
   <div class="custom-featured__heading">
-    <h2 class="h2">{{ section.settings.heading }}</h2>
+    {{ section.settings.heading }}
   </div>
   <div class="custom-featured__collection-list">
     {% for block in section.blocks %}
       {% case block.type %}
         {% when 'Collection' %}
           <div
-            class="custom-featured__collection {% if forloop.first %}active{% endif %}"
+            class="custom-featured__collection {% if forloop.first %}custom-featured__collection--active{% endif %}"
             data-collection-id="{{ block.settings.collection.id }}"
           >
             {% if block.settings.collection != blank %}
@@ -83,54 +274,63 @@
                             }}
                           </a>
                         </div>
-                        <a href="{{ product.url | url_escape}}">
-                          <div class="custom-featured__title">{{ product.title }}</div>
-                        </a>
-                        <div class="custom-featured__description">{{ product.description | truncate: 100 }}</div>
-                        <div class="custom-featured__info">
-                          <div class="custom-featured__price" id="product-price-{{ product.id }}">
-                            {{ product.price | money_without_trailing_zeros }}
+                        <div class="custom-featured__product-info">
+                          <a href="{{ product.url | url_escape}}">
+                            <div class="custom-featured__title">{{ product.title }}</div>
+                          </a>
+                          <div class="custom-featured__description">
+                            {{ product.description | strip_html | truncate: 25 }}
                           </div>
+                          <div class="custom-featured__info">
+                            <div class="custom-featured__price" id="product-price-{{ product.id }}">
+                              {{ product.price | money_without_trailing_zeros }}
+                            </div>
 
-                          {% if product.variants.size > 1 %}
-                            <select class="custom-featured__options" data-product-id="{{ product.id }}">
-                              {% for variant in product.variants %}
-                                <option
-                                  value="{{ variant.id }}"
-                                  data-price="{{ variant.price }}"
-                                  data-available="{{ variant.available }}"
-                                  data-image="{{ variant.image.src | img_url: '600x' }}"
-                                  data-currency="{{ localization.country.currency.symbol }}"
-                                >
-                                  {{ variant.title }}
-                                </option>
-                              {% endfor %}
-                            </select>
-                          {% endif %}
-                        </div>
-                        <div class="custom-featured__add-to-cart">
-                          <button
-                            class="{% if product.available %} custom-featured__add-to-cart--click {% else %} custom-featured__add-to-cart--disabled {% endif %}"
-                            data-product-id="{{ product.id }}"
-                            data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-                          >
-                            <span> {% render 'custom-cart-icon' %} </span
-                            ><span>
-                              {%- if product.available %}
-                                Add to cart
+                            {% if product.variants.size > 1 %}
+                              <select class="custom-featured__options" data-product-id="{{ product.id }}">
+                                {% for variant in product.variants %}
+                                  <option
+                                    value="{{ variant.id }}"
+                                    data-price="{{ variant.price }}"
+                                    data-available="{{ variant.available }}"
+                                    data-image="{{ variant.image.src | img_url: '600x' }}"
+                                    data-currency="{{ localization.country.currency.symbol }}"
+                                  >
+                                    {{ variant.title }}
+                                  </option>
+                                {% endfor %}
+                              </select>
+                            {% endif %}
+                          </div>
+                          <div class="custom-featured__add-to-cart">
+                            <button
+                              class="custom-button {% if product.available %} custom-featured__add-to-cart--click {% else %} custom-featured__add-to-cart--disabled {% endif %}"
+                              data-product-id="{{ product.id }}"
+                              data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                            >
+                              {% if product.available %}
+                                <span> {% render 'custom-cart-icon' %} </span>
                               {% else %}
-                                Sold Out
+                                <span> {% render 'custom-sold-out' %} </span>
                               {% endif -%}
-                            </span>
-                          </button>
+                              <span class="custom-featured__button-label">
+                                {%- if product.available %}
+                                  Add to cart
+                                {% else %}
+                                  Sold Out
+                                {% endif -%}
+                              </span>
+                            </button>
+                          </div>
+                          <div class="custom-featured__success-message">Added to the cart</div>
                         </div>
-                        <div class="custom-featured__success-message">Added to the cart</div>
                       </div>
                     {% endfor %}
                   </div>
-
-                  <div class="swiper-button-prev" data-index="{{ forloop.index }}"><span></span></div>
-                  <div class="swiper-button-next" data-index="{{ forloop.index }}"><span></span></div>
+                  <div class="custom-featured__swiper-pagination">
+                    <div class="swiper-button-prev" data-index="{{ forloop.index }}"><span></span></div>
+                    <div class="swiper-button-next" data-index="{{ forloop.index }}"><span></span></div>
+                  </div>
                 </div>
               {% else %}
                 <div class="custom-featured__product-placeholder">
@@ -185,10 +385,10 @@
       title.addEventListener('click', function () {
         const collectionId = this.getAttribute('data-collection-id');
 
-        collectionTitles.forEach((t) => t.classList.remove('active'));
+        collectionTitles.forEach((t) => t.classList.remove('custom-featured__collection--active'));
         productLists.forEach((list) => (list.style.display = 'none'));
 
-        this.classList.add('active');
+        this.classList.add('custom-featured__collection--active');
         section.querySelector(`.custom-featured__products[data-collection-id="${collectionId}"]`).style.display =
           'flex';
       });
@@ -269,49 +469,45 @@
     });
 
     function addToCart(variantId, button, successMessage) {
-  let formData = {
-    items: [{ id: variantId, quantity: 1 }],
-  };
+      let formData = {
+        items: [{ id: variantId, quantity: 1 }],
+      };
 
-  fetch(window.Shopify.routes.root + 'cart/add.js', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => response.json())
-    .then(() => {
-      
-      button.style.display = 'none';
-      successMessage.style.display = 'block';
+      fetch(window.Shopify.routes.root + 'cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+        .then(() => {
+          button.style.display = 'none';
+          successMessage.style.display = 'block';
 
-      setTimeout(() => {
-        successMessage.style.display = 'none';
-        button.style.display = 'inline-block';
-      }, 5000);
+          setTimeout(() => {
+            successMessage.style.display = 'none';
+            button.style.display = 'inline-block';
+          }, 5000);
 
-   
-      return fetch('/cart.js');
-    })
-    .then(response => response.json())
-    .then(cart => {
-      const cartBubble = document.querySelector('#cart-icon-bubble .cart-count-bubble span');
+          return fetch('/cart.js');
+        })
+        .then((response) => response.json())
+        .then((cart) => {
+          const cartBubble = document.querySelector('#cart-icon-bubble .cart-count-bubble span');
 
-      if (cartBubble) {
-        cartBubble.textContent = cart.item_count;
-      } else if (cart.item_count > 0) {
-      
-        const cartIcon = document.querySelector('#cart-icon-bubble');
-        if (cartIcon) {
-          const bubble = document.createElement('div');
-          bubble.classList.add('cart-count-bubble');
-          bubble.innerHTML = `<span aria-hidden="true">${cart.item_count}</span><span class="visually-hidden">${cart.item_count} item</span>`;
-          cartIcon.appendChild(bubble);
-        }
-      }
-    })
-    .catch((error) => console.error('Error:', error));
-}
-
+          if (cartBubble) {
+            cartBubble.textContent = cart.item_count;
+          } else if (cart.item_count > 0) {
+            const cartIcon = document.querySelector('#cart-icon-bubble');
+            if (cartIcon) {
+              const bubble = document.createElement('div');
+              bubble.classList.add('cart-count-bubble');
+              bubble.innerHTML = `<span aria-hidden="true">${cart.item_count}</span><span class="visually-hidden">${cart.item_count} item</span>`;
+              cartIcon.appendChild(bubble);
+            }
+          }
+        })
+        .catch((error) => console.error('Error:', error));
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -343,6 +539,18 @@
 {
   "name": "Custom Featured Products",
   "settings": [
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Section Text Color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "buttons_color",
+      "label": "Section Buttons Color",
+      "default": "#000"
+    },
     {
       "type": "text",
       "id": "heading",
@@ -428,6 +636,26 @@
           "label": "2"
         }
       ]
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
     }
   ],
   "blocks": [
