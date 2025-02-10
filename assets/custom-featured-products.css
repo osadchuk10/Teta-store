@@ -24,6 +24,9 @@
   padding: 10px 8px;
   border-radius: 64px;
 }
+.custom-featured__collection:hover{
+  cursor: pointer;
+}
 .custom-featured__heading {
   text-align: center;
   font-size: 48px;
