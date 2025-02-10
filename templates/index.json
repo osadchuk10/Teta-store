@@ -29,12 +29,19 @@
           "settings": {
             "collection": "my-collection-1"
           }
+        },
+        "collection_mG3fqJ": {
+          "type": "Collection",
+          "settings": {
+            "collection": "on-sale"
+          }
         }
       },
       "block_order": [
         "collection_nLYEdi",
         "collection_H6hFhx",
-        "collection_HfNwWk"
+        "collection_HfNwWk",
+        "collection_mG3fqJ"
       ],
       "settings": {
         "text_color": "#37341c",
