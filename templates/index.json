@@ -55,9 +55,79 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "featured_product_tUQcqB": {
+      "type": "featured-product",
+      "blocks": {
+        "text_HjNdhG": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_DePFV4": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price_3WCWUG": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_6hTtXa": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector_ePMeRy": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons_4ARtcg": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share_BD4y3d": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "text_HjNdhG",
+        "title_DePFV4",
+        "price_3WCWUG",
+        "variant_picker_6hTtXa",
+        "quantity_selector_ePMeRy",
+        "buy_buttons_4ARtcg",
+        "share_BD4y3d"
+      ],
+      "settings": {
+        "product": "the-collection-snowboard-liquid",
+        "color_scheme": "",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
-    "custom_featured_products_6gG4KG"
+    "custom_featured_products_6gG4KG",
+    "featured_product_tUQcqB"
   ]
 }
