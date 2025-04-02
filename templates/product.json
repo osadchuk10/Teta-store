@@ -12,6 +12,10 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "loop_subscriptions_loop_widget_ViUnfb": {
+          "type": "shopify://apps/loop-subscriptions/blocks/loop_widget/267a7c64-5cb3-4552-b817-5485165f0a0b",
+          "settings": {}
+        },
         "rebuy_personalization_engine_rebuy_widget_JUckkp": {
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "settings": {
@@ -78,9 +82,14 @@
             "looxOpenFloatingWidget": false,
             "emptyRatingWidget": false
           }
+        },
+        "loop_subscriptions_loop_widget_wWzdMV": {
+          "type": "shopify://apps/loop-subscriptions/blocks/loop_widget/267a7c64-5cb3-4552-b817-5485165f0a0b",
+          "settings": {}
         }
       },
       "block_order": [
+        "loop_subscriptions_loop_widget_ViUnfb",
         "rebuy_personalization_engine_rebuy_widget_JUckkp",
         "vendor",
         "title",
@@ -90,7 +99,8 @@
         "buy_buttons",
         "description",
         "share",
-        "loox_reviews_loox_rating_WVj3pi"
+        "loox_reviews_loox_rating_WVj3pi",
+        "loop_subscriptions_loop_widget_wWzdMV"
       ],
       "settings": {
         "enable_sticky_info": true,
