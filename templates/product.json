@@ -47,6 +47,15 @@
           "type": "quantity_selector",
           "settings": {}
         },
+        "rebuy_personalization_engine_rebuy_widget_mCDqBM": {
+          "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "206726",
+            "product_id_enabled": true,
+            "collection_id_enabled": true
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -87,6 +96,7 @@
         "price",
         "variant_picker",
         "quantity_selector",
+        "rebuy_personalization_engine_rebuy_widget_mCDqBM",
         "buy_buttons",
         "description",
         "share",
@@ -125,54 +135,10 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
-    },
-    "1739179085a6a81d22": {
-      "type": "apps",
-      "blocks": {
-        "loox_reviews_loox_dynamic_section_ttaYNk": {
-          "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
-          "settings": {
-            "only_photos": false,
-            "aggregated": false,
-            "limit": 20,
-            "hide_thumbnails": false,
-            "maxwidth": 1080,
-            "is_sample": true
-          }
-        }
-      },
-      "block_order": [
-        "loox_reviews_loox_dynamic_section_ttaYNk"
-      ],
-      "settings": {
-        "include_margins": true
-      }
-    },
-    "174357961236671fed": {
-      "type": "apps",
-      "blocks": {
-        "rebuy_personalization_engine_rebuy_widget_UxBEME": {
-          "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
-          "settings": {
-            "enabled": true,
-            "id": "",
-            "product_id_enabled": true,
-            "collection_id_enabled": false
-          }
-        }
-      },
-      "block_order": [
-        "rebuy_personalization_engine_rebuy_widget_UxBEME"
-      ],
-      "settings": {
-        "include_margins": true
-      }
     }
   },
   "order": [
     "main",
-    "related-products",
-    "1739179085a6a81d22",
-    "174357961236671fed"
+    "related-products"
   ]
 }
