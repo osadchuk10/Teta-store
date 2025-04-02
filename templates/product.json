@@ -12,6 +12,15 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "rebuy_personalization_engine_rebuy_widget_JUckkp": {
+          "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
+        },
         "vendor": {
           "type": "text",
           "settings": {
@@ -72,6 +81,7 @@
         }
       },
       "block_order": [
+        "rebuy_personalization_engine_rebuy_widget_JUckkp",
         "vendor",
         "title",
         "price",
@@ -137,11 +147,32 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "174357961236671fed": {
+      "type": "apps",
+      "blocks": {
+        "rebuy_personalization_engine_rebuy_widget_UxBEME": {
+          "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
+        }
+      },
+      "block_order": [
+        "rebuy_personalization_engine_rebuy_widget_UxBEME"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
     "main",
     "related-products",
-    "1739179085a6a81d22"
+    "1739179085a6a81d22",
+    "174357961236671fed"
   ]
 }
