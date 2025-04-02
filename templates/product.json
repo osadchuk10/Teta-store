@@ -12,6 +12,12 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "seal_subscriptions_subscription_widget_7Utr6X": {
+          "type": "shopify://apps/seal-subscriptions/blocks/subscription-widget/13b25004-a140-4ab7-b5fe-29918f759699",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
         "loop_subscriptions_loop_widget_ViUnfb": {
           "type": "shopify://apps/loop-subscriptions/blocks/loop_widget/267a7c64-5cb3-4552-b817-5485165f0a0b",
           "settings": {}
@@ -89,6 +95,7 @@
         }
       },
       "block_order": [
+        "seal_subscriptions_subscription_widget_7Utr6X",
         "loop_subscriptions_loop_widget_ViUnfb",
         "rebuy_personalization_engine_rebuy_widget_JUckkp",
         "vendor",
