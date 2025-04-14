@@ -161,6 +161,11 @@
         "type": "shopify://apps/seal-subscriptions/blocks/subscription-script-append/13b25004-a140-4ab7-b5fe-29918f759699",
         "disabled": false,
         "settings": {}
+      },
+      "7316129390727635243": {
+        "type": "shopify://apps/nerdy-form-builder/blocks/app-embed-block/69a5a9d9-7d66-4c42-a315-78fd5ac4e441",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
