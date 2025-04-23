@@ -124,10 +124,33 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "rich_text_cQDCAW": {
+      "type": "rich-text",
+      "blocks": {
+        "text_LXBH3z": {
+          "type": "text",
+          "settings": {
+            "text": "<p>&lt;script type=\"text/javascript\" async src=\"https://cdn.reamaze.com/assets/reamaze-loader.js\"&gt;&lt;/script&gt;<br/>&lt;script type=\"text/javascript\"&gt;<br/>  var _support = _support || &lcub; 'ui': &lcub;&rcub;, 'user': &lcub;&rcub; &rcub;;<br/>  _support['account'] = 'teta-store-test';<br/>  _support['ui']['contactMode'] = 'mixed';<br/>  _support['ui']['enableKb'] = 'true';<br/>  _support['ui']['styles'] = &lcub;<br/>    widgetColor: 'rgba(16, 162, 197, 1)',<br/>    gradient: true,<br/>  &rcub;;<br/>  _support['ui']['shoutboxFacesMode'] = 'default';<br/>  _support['ui']['shoutboxHeaderLogo'] = true;<br/>  _support['ui']['widget'] = &lcub;<br/>    displayOn: 'all',<br/>    fontSize: 'default',<br/>    allowBotProcessing: true,<br/>    slug: 'teta-store-test-chat-slash-contact-form-shoutbox-2de8dead6407ec8c',<br/>    label: &lcub;<br/>      text: 'Let us know if you have any questions! &#128522;',<br/>      mode: \"notification\",<br/>      delay: 3,<br/>      duration: 30,<br/>      primary: 'I have a question',<br/>      secondary: 'No, thanks',<br/>      sound: true,<br/>    &rcub;,<br/>    position: 'bottom-right',<br/>    mobilePosition: 'bottom-right'<br/>  &rcub;;<br/>  _support['apps'] = &lcub;<br/>    faq: &lcub;\"enabled\":true&rcub;,<br/>    recentConversations: &lcub;&rcub;,<br/>    orders: &lcub;&rcub;,<br/>    shopper: &lcub;&rcub;<br/>  &rcub;;<br/>  _support['ui']['appOrder'] = [\"faq\",\"orders\",\"shopper\",\"recentConversations\"];<br/>&lt;/script&gt;<br/><br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_LXBH3z"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "custom_featured_products_6gG4KG",
-    "featured_product_tUQcqB"
+    "featured_product_tUQcqB",
+    "rich_text_cQDCAW"
   ]
 }
